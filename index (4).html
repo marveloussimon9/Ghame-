@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloom — Female Wellness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:     #e8c5b5;
+      --blush:    #f5e6df;
+      --clay:     #c4846a;
+      --sage:     #8aaa8c;
+      --ivory:    #fdf8f5;
+      --dark:     #2c1f1a;
+      --mid:      #6b4c42;
+      --text:     #3d2b24;
+      --light-text:#9e7a6e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ivory);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 5vw;
+      background: rgba(253,248,245,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(196,132,106,0.15);
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 600; letter-spacing: .04em;
+      color: var(--clay); text-decoration: none;
+    }
+    .logo span { font-style: italic; font-weight: 300; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: .85rem; font-weight: 400;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--mid); transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--clay); }
+    .nav-cta {
+      background: var(--clay); color: #fff;
+      padding: .55rem 1.4rem; border-radius: 50px;
+      font-size: .8rem; font-weight: 500; letter-spacing: .05em;
+      text-decoration: none; text-transform: uppercase;
+      transition: background .25s, transform .2s;
+    }
+    .nav-cta:hover { background: var(--mid); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+      padding: 8rem 5vw 5rem;
+      gap: 4rem;
+      background: linear-gradient(135deg, var(--blush) 0%, var(--ivory) 60%);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -10%; right: -5%;
+      width: 55vw; height: 55vw; border-radius: 50%;
+      background: radial-gradient(circle, var(--rose) 0%, transparent 70%);
+      opacity: .45; pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block;
+      font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--clay); border: 1px solid var(--clay);
+      padding: .35rem .9rem; border-radius: 50px; margin-bottom: 1.8rem;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 300; line-height: 1.1;
+      color: var(--dark); margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--clay); }
+    .hero p {
+      font-size: 1.05rem; line-height: 1.75;
+      color: var(--light-text); max-width: 42ch; margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--clay); color: #fff;
+      padding: .9rem 2.2rem; border-radius: 50px;
+      font-size: .9rem; font-weight: 500;
+      text-decoration: none; transition: all .25s;
+      letter-spacing: .03em;
+    }
+    .btn-primary:hover { background: var(--mid); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(196,132,106,.35); }
+    .btn-ghost {
+      color: var(--clay); border: 1.5px solid var(--clay);
+      padding: .9rem 2.2rem; border-radius: 50px;
+      font-size: .9rem; font-weight: 500;
+      text-decoration: none; transition: all .25s;
+    }
+    .btn-ghost:hover { background: var(--blush); transform: translateY(-2px); }
+
+    .hero-visual {
+      position: relative; display: flex; justify-content: center; align-items: center;
+    }
+    .hero-card {
+      background: #fff;
+      border-radius: 2rem; padding: 2.5rem;
+      box-shadow: 0 30px 80px rgba(44,31,26,.1);
+      max-width: 380px; width: 100%;
+      animation: floatCard 4s ease-in-out infinite;
+      position: relative; z-index: 1;
+    }
+    @keyframes floatCard {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+    .hero-card-header {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; color: var(--dark);
+      margin-bottom: 1.5rem; display: flex; align-items: center; gap: .6rem;
+    }
+    .hero-card-header span { font-size: 1.5rem; }
+    .cycle-bar { margin-bottom: 1rem; }
+    .cycle-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: .8rem; color: var(--light-text); margin-bottom: .4rem;
+    }
+    .cycle-bar-track {
+      height: 8px; background: var(--blush); border-radius: 50px; overflow: hidden;
+    }
+    .cycle-bar-fill {
+      height: 100%; border-radius: 50px;
+      background: linear-gradient(90deg, var(--rose), var(--clay));
+      animation: growBar 1.5s ease-out forwards;
+      transform-origin: left;
+    }
+    @keyframes growBar { from { width: 0; } }
+    .cycle-phases {
+      display: flex; gap: .5rem; margin-top: 1.5rem; flex-wrap: wrap;
+    }
+    .phase-chip {
+      font-size: .75rem; padding: .3rem .8rem; border-radius: 50px;
+      font-weight: 500;
+    }
+    .phase-chip.active { background: var(--clay); color: #fff; }
+    .phase-chip.inactive { background: var(--blush); color: var(--mid); }
+
+    .floating-badge {
+      position: absolute;
+      background: var(--sage); color: #fff;
+      padding: .6rem 1.1rem; border-radius: 1rem;
+      font-size: .8rem; font-weight: 500;
+      box-shadow: 0 10px 30px rgba(138,170,140,.3);
+    }
+    .badge-1 { top: 5%; left: -5%; animation: floatCard 5s ease-in-out infinite; }
+    .badge-2 { bottom: 10%; right: -5%; animation: floatCard 6s ease-in-out infinite reverse; }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--dark);
+      padding: 4rem 5vw;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem; text-align: center;
+    }
+    .stat-item { padding: 1rem; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300; color: var(--rose);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .85rem; color: rgba(255,255,255,.55);
+      margin-top: .4rem; letter-spacing: .05em; text-transform: uppercase;
+    }
+
+    /* ── FEATURES ── */
+    .features {
+      padding: 7rem 5vw;
+      background: var(--ivory);
+    }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-tag {
+      font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--clay); margin-bottom: .8rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300;
+      color: var(--dark); line-height: 1.2;
+    }
+    .section-title em { font-style: italic; color: var(--clay); }
+    .section-sub {
+      font-size: 1rem; color: var(--light-text);
+      max-width: 50ch; margin: 1rem auto 0; line-height: 1.7;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: 1.5rem; padding: 2.2rem;
+      transition: transform .3s, box-shadow .3s;
+      border: 1px solid rgba(196,132,106,.1);
+      position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--clay));
+      opacity: 0; transition: opacity .3s;
+    }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,31,26,.1); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: var(--blush); display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.3rem;
+    }
+    .feature-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; color: var(--dark);
+      margin-bottom: .6rem;
+    }
+    .feature-card p { font-size: .9rem; color: var(--light-text); line-height: 1.7; }
+
+    /* ── TIPS ── */
+    .tips {
+      padding: 7rem 5vw;
+      background: linear-gradient(135deg, var(--blush) 0%, #faeee7 100%);
+    }
+    .tips-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+      margin-top: 4rem;
+    }
+    .tips-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .tip-item {
+      background: #fff; border-radius: 1rem; padding: 1.5rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+      box-shadow: 0 4px 20px rgba(44,31,26,.06);
+      transition: transform .25s;
+    }
+    .tip-item:hover { transform: translateX(6px); }
+    .tip-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 300; color: var(--rose);
+      line-height: 1; min-width: 2rem;
+    }
+    .tip-content h4 {
+      font-weight: 500; color: var(--dark); margin-bottom: .3rem; font-size: .95rem;
+    }
+    .tip-content p { font-size: .85rem; color: var(--light-text); line-height: 1.6; }
+    .tips-visual {
+      background: #fff; border-radius: 2rem; padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(44,31,26,.1);
+    }
+    .tips-visual h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; color: var(--dark); margin-bottom: 1.5rem;
+    }
+    .mood-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: .4rem; }
+    .mood-day {
+      aspect-ratio: 1; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; cursor: pointer; transition: transform .2s;
+    }
+    .mood-day:hover { transform: scale(1.15); }
+    .mood-labels {
+      display: flex; justify-content: space-between;
+      margin-top: .5rem; font-size: .7rem; color: var(--light-text);
+    }
+    .mood-legend { display: flex; gap: .8rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: .4rem; font-size: .78rem; color: var(--light-text); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { padding: 7rem 5vw; background: var(--ivory); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 4rem;
+    }
+    .testi-card {
+      background: #fff; border-radius: 1.5rem; padding: 2rem;
+      border: 1px solid rgba(196,132,106,.1);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(44,31,26,.08); }
+    .testi-stars { color: var(--clay); font-size: 1rem; margin-bottom: 1rem; }
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic; font-weight: 300;
+      color: var(--dark); line-height: 1.65; margin-bottom: 1.5rem;
+    }
+    .testi-author { display: flex; align-items: center; gap: .8rem; }
+    .testi-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; background: var(--blush);
+    }
+    .testi-name { font-weight: 500; font-size: .9rem; color: var(--dark); }
+    .testi-role { font-size: .78rem; color: var(--light-text); }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 7rem 5vw; text-align: center;
+      background: var(--dark);
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 60vw; height: 60vw; border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,132,106,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section .section-tag { color: var(--rose); }
+    .cta-section .section-title { color: #fff; }
+    .cta-section .section-title em { color: var(--rose); }
+    .cta-section p {
+      color: rgba(255,255,255,.55); max-width: 48ch;
+      margin: 1rem auto 2.5rem; line-height: 1.7;
+    }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1c1210; color: rgba(255,255,255,.5);
+      padding: 3rem 5vw;
+      display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center;
+    }
+    footer .logo { color: var(--rose); font-size: 1.5rem; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: rgba(255,255,255,.4); text-decoration: none; font-size: .83rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--rose); }
+    .footer-copy { font-size: .78rem; margin-top: .4rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding-top: 6rem; }
+      .hero-visual { display: none; }
+      .nav-links { display: none; }
+      .tips-grid { grid-template-columns: 1fr; }
+      .tips-visual { order: -1; }
+      footer { grid-template-columns: 1fr; }
+      .footer-links { flex-wrap: wrap; }
+    }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">Bloom<span>·</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Wellness</a></li>
+    <li><a href="#tips">Cycle Tips</a></li>
+    <li><a href="#stories">Stories</a></li>
+  </ul>
+  <a class="nav-cta" href="#cta">Start Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <span class="hero-tag">✦ Holistic Female Wellness</span>
+    <h1>Nourish your <em>body,</em> honor your cycle.</h1>
+    <p>Bloom is your gentle companion for cycle tracking, hormonal balance, mindful nutrition, and whole-body wellness — designed with women, for women.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#cta">Begin Your Journey</a>
+      <a class="btn-ghost" href="#features">Explore Features</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <span class="floating-badge badge-1">🌸 Day 14 — Ovulation</span>
+    <div class="hero-card">
+      <div class="hero-card-header"><span>🌙</span> Your Cycle Today</div>
+
+      <div class="cycle-bar">
+        <div class="cycle-bar-label"><span>Energy</span><span>High</span></div>
+        <div class="cycle-bar-track"><div class="cycle-bar-fill" style="width:78%"></div></div>
+      </div>
+      <div class="cycle-bar">
+        <div class="cycle-bar-label"><span>Mood</span><span>Balanced</span></div>
+        <div class="cycle-bar-track"><div class="cycle-bar-fill" style="width:65%; animation-delay:.2s"></div></div>
+      </div>
+      <div class="cycle-bar">
+        <div class="cycle-bar-label"><span>Hydration</span><span>Good</span></div>
+        <div class="cycle-bar-track"><div class="cycle-bar-fill" style="width:88%; animation-delay:.4s"></div></div>
+      </div>
+
+      <div class="cycle-phases">
+        <span class="phase-chip inactive">Menstrual</span>
+        <span class="phase-chip inactive">Follicular</span>
+        <span class="phase-chip active">Ovulatory</span>
+        <span class="phase-chip inactive">Luteal</span>
+      </div>
+    </div>
+    <span class="floating-badge badge-2">💧 8 glasses today</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat-item reveal">
+    <div class="stat-num">50K+</div>
+    <div class="stat-label">Women Supported</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num">4.9★</div>
+    <div class="stat-label">Average Rating</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num">28</div>
+    <div class="stat-label">Cycle Day Insights</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Science-Backed</div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-header reveal">
+    <p class="section-tag">✦ What We Offer</p>
+    <h2 class="section-title">Everything you need to <em>thrive</em></h2>
+    <p class="section-sub">From cycle awareness to daily rituals, Bloom brings your wellness into focus with compassion and clarity.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">🌸</div>
+      <h3>Cycle Tracking</h3>
+      <p>Log your period, symptoms, and moods. Understand your unique pattern and receive phase-specific insights tailored to you.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">🥗</div>
+      <h3>Nutrition Guidance</h3>
+      <p>Discover foods that support each phase of your cycle — from iron-rich meals during menstruation to antioxidants in your luteal phase.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">🧘‍♀️</div>
+      <h3>Mindful Movement</h3>
+      <p>Gentle yoga flows, strength routines, and rest-day rituals perfectly synced to your hormonal rhythms for sustainable energy.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-3">
+      <div class="feature-icon">🌿</div>
+      <h3>Hormone Balance</h3>
+      <p>Science-backed tips on sleep, stress management, and herbal support to keep your hormones naturally in harmony.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-icon">💤</div>
+      <h3>Sleep Rituals</h3>
+      <p>Personalized bedtime routines and sleep-quality tracking to help you wake up restored and ready for your day.</p>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-icon">💬</div>
+      <h3>Community Support</h3>
+      <p>Connect with thousands of women navigating the same journey. Share experiences, ask questions, and grow together.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WELLNESS TIPS -->
+<section class="tips" id="tips">
+  <div class="section-header reveal">
+    <p class="section-tag">✦ Cycle Wisdom</p>
+    <h2 class="section-title">Live in sync with <em>your rhythm</em></h2>
+    <p class="section-sub">Your cycle is a superpower. These daily practices help you work with your body, not against it.</p>
+  </div>
+  <div class="tips-grid">
+    <div class="tips-list">
+      <div class="tip-item reveal">
+        <div class="tip-num">01</div>
+        <div class="tip-content">
+          <h4>Honor Your Rest Phase</h4>
+          <p>During menstruation, slow down with restorative yoga, warming foods, and extra sleep. Your body is doing hard work.</p>
+        </div>
+      </div>
+      <div class="tip-item reveal reveal-delay-1">
+        <div class="tip-num">02</div>
+        <div class="tip-content">
+          <h4>Harness Follicular Energy</h4>
+          <p>Rising estrogen boosts creativity and motivation. This is the perfect time for new projects and social connection.</p>
+        </div>
+      </div>
+      <div class="tip-item reveal reveal-delay-2">
+        <div class="tip-num">03</div>
+        <div class="tip-content">
+          <h4>Peak Power at Ovulation</h4>
+          <p>Your communication and confidence peak. Schedule important meetings, workouts, and social events now.</p>
+        </div>
+      </div>
+      <div class="tip-item reveal reveal-delay-3">
+        <div class="tip-num">04</div>
+        <div class="tip-content">
+          <h4>Ground in the Luteal Phase</h4>
+          <p>Progesterone rises — use this introspective time for deep work, journaling, and nourishing comfort foods.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-visual reveal reveal-delay-2">
+      <h3>🗓 Monthly Mood Map</h3>
+      <div class="mood-grid" id="moodGrid"></div>
+      <div class="mood-labels"><span>Week 1</span><span>Week 2</span><span>Week 3</span><span>Week 4</span></div>
+      <div class="mood-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#e8c5b5"></div>Menstrual</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#8aaa8c"></div>Follicular</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c4846a"></div>Ovulatory</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#9b6ea8"></div>Luteal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="stories">
+  <div class="section-header reveal">
+    <p class="section-tag">✦ Real Stories</p>
+    <h2 class="section-title">Women who <em>bloomed</em></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Finally an app that treats my cycle as a gift, not a problem. I understand my body so much better now — my energy, moods, everything makes sense."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🌺</div>
+        <div>
+          <div class="testi-name">Amara O.</div>
+          <div class="testi-role">Wellness Coach, Lagos</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"The nutrition tips changed everything. Eating with my cycle reduced my PMS symptoms by about 70% within two months. This is life-changing."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🌷</div>
+        <div>
+          <div class="testi-name">Sofia M.</div>
+          <div class="testi-role">Teacher, Barcelona</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal reveal-delay-2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"I used to push through exhaustion every day. Bloom taught me that resting IS productive. My performance at work actually improved when I started listening to my body."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🌻</div>
+        <div>
+          <div class="testi-name">Priya K.</div>
+          <div class="testi-role">Software Engineer, Bangalore</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div style="position:relative;z-index:1">
+    <p class="section-tag">✦ Begin Today</p>
+    <h2 class="section-title">Your wellness journey <em>starts now</em></h2>
+    <p>Join 50,000+ women who have transformed their relationship with their bodies. Free forever, always supportive.</p>
+    <div class="cta-btns">
+      <a class="btn-primary" href="#">Get Started Free</a>
+      <a href="#" style="color:rgba(255,255,255,.6); text-decoration:none; padding:.9rem 1.5rem; font-size:.9rem;">Learn More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a class="logo" href="#">Bloom<span style="font-style:italic;font-weight:300">·</span></a>
+    <p class="footer-copy">© 2025 Bloom Wellness. Made with love for every woman.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+    <a href="#">Instagram</a>
+  </div>
+</footer>
+
+<script>
+  // Mood Grid
+  const phases = [
+    { emoji: '🌙', color: '#f5e6df', title: 'Menstrual' },
+    { emoji: '🌱', color: '#d4e8d5', title: 'Follicular' },
+    { emoji: '☀️', color: '#f0d5c8', title: 'Ovulatory' },
+    { emoji: '🍂', color: '#e8d4f0', title: 'Luteal' },
+  ];
+  const phaseMap = [0,0,0,0,0,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3];
+  const grid = document.getElementById('moodGrid');
+  phaseMap.forEach((p, i) => {
+    const day = document.createElement('div');
+    day.className = 'mood-day';
+    day.style.background = phases[p].color;
+    day.title = `Day ${i+1} — ${phases[p].title}`;
+    day.textContent = phases[p].emoji;
+    grid.appendChild(day);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
